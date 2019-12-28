@@ -32,7 +32,12 @@ func Get(repos []string) {
 func getRepo(name string) *Repo {
 	r := new(Repo)
 
-	err := request.GetJSON(fmt.Sprintf("https://api.github.com/repos/%s", name), r)
+	err := request.GetJSON(
+		&request.Options{
+			URL: fmt.Sprintf("https://api.github.com/repos/%s", name),
+		},
+		r,
+	)
 	if err != nil {
 		fmt.Println(err)
 	}
